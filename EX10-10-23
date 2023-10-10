@@ -1,0 +1,40 @@
+CREATE SCHEMA sistema;
+use sistema;
+
+CREATE TABLE IF NOT EXISTS clientes(
+clienteID INT PRIMARY KEY,
+nome VARCHAR(80),
+email VARCHAR(50) UNIQUE
+);
+CREATE TABLE IF NOT EXISTS categorias(
+categoriaID INT PRIMARY KEY,
+nomeCategoria VARCHAR(50)
+);
+CREATE TABLE IF NOT EXISTS produtos(
+produtoID INT PRIMARY KEY,
+categoriaID INT,
+nomeProduto VARCHAR(50),
+preco DOUBLE(4,3),
+descrição VARCHAR(100),
+FOREIGN KEY (categoriaID) REFERENCES categorias(categoriaID)
+); 
+CREATE TABLE IF NOT EXISTS pedidos(
+pedidoID INT PRIMARY KEY,
+clienteID INT,
+dataPedido date,
+totalPedido DOUBLE(4,3),
+FOREIGN KEY pedidos(clienteID) references clientes(clienteID)
+);
+CREATE TABLE IF NOT EXISTS itensPedido(
+itemID INT PRIMARY KEY,
+pedidoID INT,
+produtoID INT,
+quantidade INT,
+precoUnitario DOUBLE,
+FOREIGN KEY (pedidoID) REFERENCES pedidos(pedidoID),
+FOREIGN KEY (produtoID) REFERENCES produtos(produtoID)
+);
+ALTER TABLE produtos
+ADD categoriaID INT;
+ALTER TABLE produtos
+ADD FOREIGN KEY (categoriaID) REFERENCES categorias(categoriaID);
