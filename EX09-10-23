@@ -1,0 +1,44 @@
+CREATE SCHEMA colheitaFeliz;
+USE colheitaFeliz;
+
+CREATE TABLE IF NOT EXISTS canteiro(
+canteiroID INT PRIMARY KEY,
+nome CHAR(30),
+luzdiaria DOUBLE,
+aguadiaria DOUBLE
+);
+CREATE TABLE IF NOT EXISTS funcionario(
+funcID INT PRIMARY KEY,
+nome VARCHAR(80),
+idade INT
+);
+CREATE TABLE IF NOT EXISTS planta(
+plantaID INT PRIMARY KEY,
+nome VARCHAR(20),
+luzdiaria DOUBLE,
+agua DOUBLE,
+peso DOUBLE
+);
+CREATE TABLE IF NOT EXISTS colhido(
+colhidoID INT PRIMARY KEY,
+plantaID INT,
+funcID INT,
+canteiroID INT,
+dataC date,
+quantidade INT,
+peso DOUBLE,
+FOREIGN KEY (plantaID) REFERENCES planta(plantaID),
+FOREIGN KEY (funcID) REFERENCES funcionario(funcID),
+FOREIGN KEY (canteiroID) REFERENCES canteiro(canteiroID)
+);
+CREATE TABLE IF NOT EXISTS plantio(
+plantioID INT PRIMARY KEY,
+plantaID INT,
+funcID INT,
+canteiroID INT,
+dataC date,
+sementes INT,
+FOREIGN KEY (plantaID) REFERENCES planta(plantaID),
+FOREIGN KEY (funcID) REFERENCES funcionario(funcID),
+FOREIGN KEY (canteiroID) REFERENCES canteiro(canteiroID)
+);
