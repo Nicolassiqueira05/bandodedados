@@ -1,0 +1,71 @@
+exercício 2.
+
+create schema biblioteca;
+use biblioteca;
+
+create table if not exists livro (
+ISBN int primary key unique,
+Titulo varchar(255),
+Autor varchar(255),
+Ano date,
+Genero varchar(255),
+quantidade int
+);
+create table if not exists autor (
+ID int primary key,
+Nome varchar(255),
+nascimento date,
+nacionalidade varchar(255)
+);
+create table if not exists leitor (
+ID int primary key,
+Nome varchar(255),
+Nascimento date,
+Endereco varchar(255),
+Email varchar(255)
+);
+create table if not exists emprestimo (
+ID int primary key,
+IDleitor int,
+ISBN int,
+Dataemprestimo date,
+Datadevolucao date,
+foreign key (IDleitor) references leitor(ID),
+foreign key (ISBN) references livro(ISBN)
+);
+
+exercício 3.
+
+create schema loja;
+use loja;
+
+create table if not exists produto (
+ID int primary key,
+nome varchar(255),
+descricao varchar(255),
+preco float,
+estoque int
+);
+create table if not exists cliente (
+ID int primary key,
+nome varchar(255),
+endereco varchar(255),
+email varchar(255),
+numero varchar(15)
+);
+create table if not exists pedido (
+ID int primary key,
+IDcliente int,
+datapedido date,
+statuspedido varchar(255),
+foreign key (IDcliente) references cliente(ID)
+);
+create table if not exists item (
+ID int primary key unique,
+IDpedido int,
+IDproduto int,
+quantidade int,
+precounitario float,
+foreign key (IDpedido) references pedido(ID),
+foreign key (IDproduto) references produto(ID)
+);
