@@ -146,3 +146,12 @@ Hotel_ID int,
 Data_reserva date,
 Duracao int
 );
+
+alter table reserva
+add constraint Cliente_ID foreign key (Cliente_ID) references cliente(id);
+
+alter table reserva
+add constraint Voo_ID foreign key (Voo_ID) references voo(NDV);
+
+alter table reserva
+add constraint Hotel_ID foreign key (Hotel_ID) references hotel(ID)
