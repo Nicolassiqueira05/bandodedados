@@ -108,3 +108,41 @@ foreign key (paciente_ID) references paciente(ID),
 foreign key (medico_ID) references medico(ID)
 );
 
+exercício 5.
+
+create schema agencia;
+use agencia;
+
+create table if not exists cliente(
+ID int primary key unique,
+Nome varchar(255),
+Data_nasc date,
+Email varchar(255),
+Telefone bigint(14)
+);
+
+create table if not exists voo(
+NDV int primary key unique,
+Comp varchar(255),
+Origem varchar(255),
+Destino varchar(255),
+DataHora_part datetime,
+DataHora_cheg datetime 
+);
+
+create table if not exists hotel(
+ID int primary key unique,
+Nome varchar(255),
+Endereco varchar(255),
+Classificacao int,
+N_quartos int
+);
+
+create table if not exists reserva(
+ID int primary key unique,
+Cliente_ID int,
+Voo_ID int,
+Hotel_ID int,
+Data_reserva date,
+Duracao int
+);
