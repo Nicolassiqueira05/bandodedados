@@ -69,3 +69,42 @@ precounitario float,
 foreign key (IDpedido) references pedido(ID),
 foreign key (IDproduto) references produto(ID)
 );
+
+exercício 4.
+
+create schema hospital;
+use hospital;
+
+create table if not exists paciente(
+ID int primary key unique,
+Nome varchar(255),
+Data_nasc date,
+Gênero enum("M", "F"),
+Endereco varchar(255),
+Telefone bigint(14)
+);
+
+create table if not exists medico(
+ID int primary key unique,
+Nome varchar(255),
+Especialidade varchar(255),
+data_cont date
+);
+
+create table if not exists enfermeiro(
+ID int primary key unique,
+Nome varchar(255),
+Especialidade varchar(255),
+data_nasc date
+);
+
+create table if not exists consulta(
+ID int primary key unique,
+paciente_ID int,
+medico_id int,
+data_cons date,
+hora_cons time,
+foreign key (paciente_ID) references paciente(ID),
+foreign key (medico_ID) references medico(ID)
+);
+
