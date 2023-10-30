@@ -1,0 +1,25 @@
+Create schema biblioteca;
+use biblioteca;
+
+create table if not exists Livro(
+ID int auto_increment primary key,
+Titulo varchar(250),
+Autor varchar(250),
+ISBN int,
+Editora varchar(255),
+AnoPublicacao year,
+Paginas int,
+Genero enum('poesia', 'soneto', 'romance', 'fábula', 'novela', 'cronica', 'conto', 'ensaio', 'biografia', 'chicklit', 'fantasia', 'distopia', 'ficcao cientifica', 'horror', 'fantastica', 'infanto juvenil', 'young adult', 'suspense', 'autoajuda', 'negocios', 'tecnologia', 'hq', 'aventura'),
+Idioma varchar(50),
+QntTotal int,
+QntDisponivel int
+);
+
+alter table Livro drop column ISBN;
+alter table Livro add column ISBN varchar(50);
+
+INSERT INTO Livro (Titulo, Autor, ISBN, Editora, AnoPublicacao, Paginas, Genero, Idioma, QntTotal, QntDisponivel) VALUES ("O Senhor dos anéis: a sociedade do anel", "JRR Tolkien", "9780007203543", "Harper Collins", 1954, 576, "fantasia", "Português", 100, 30);
+INSERT INTO Livro (Titulo, Autor, ISBN, Editora, AnoPublicacao, Paginas, Genero, Idioma, QntTotal, QntDisponivel) VALUES ("Harry Potter e a pedra filosofal", "JK Rowling", "8532530788", "Rocco", 2017, 208, "fantasia", "Português", 200, 20);
+INSERT INTO Livro (Titulo, Autor, ISBN, Editora, AnoPublicacao, Paginas, Genero, Idioma, QntTotal, QntDisponivel) VALUES ("As crônicas de gelo e fogo: o festim dos corvos", "George R.R Martin", "8544102956", "LeYa", 2015, 608, "fantasia", "Português", 100, 15);
+
+SELECT * FROM Livro;
