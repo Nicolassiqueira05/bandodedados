@@ -1,0 +1,30 @@
+Create schema comercio;
+use comercio;
+
+create table if not exists venda(
+venda_id int primary key auto_increment,
+produto varchar(255),
+quantidade int,
+preco_unit int
+);
+
+insert into venda(produto, quantidade, preco_unit) values ("Produto A", 5, 10);
+insert into venda(produto, quantidade, preco_unit) values ("Produto B", 3, 20);
+insert into venda(produto, quantidade, preco_unit) values ("Produto A", 2, 10);
+insert into venda(produto, quantidade, preco_unit) values ("Produto C", 7, 15);
+insert into venda(produto, quantidade, preco_unit) values ("Produto B", 4, 20);
+insert into venda(produto, quantidade, preco_unit) values ("Produto A", 3, 12);
+
+/*EX01*/
+select sum(quantidade * preco_unit) from venda;
+/*EX02*/
+select avg(preco_unit) from venda;
+/*EX03*/
+select produto, sum(quantidade * preco_unit) from venda where produto = "Produto A";
+/*EX04*/
+select produto, sum(quantidade) from venda group by produto;
+/*EX05*/
+select produto, avg(quantidade * preco_unit) from venda group by produto;
+/*EX06*/
+/*EX07*/
+select produto from venda where preco_unit = (select max(preco_unit) from venda)
