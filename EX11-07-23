@@ -1,0 +1,28 @@
+create schema biblioteca;
+use biblioteca;
+
+create table if not exists usuarios(
+usuario_id int primary key auto_increment,
+nome varchar(255),
+email varchar(255),
+telefone varchar(15)
+);
+
+create table if not exists livro(
+livro_id int primary key auto_increment,
+titulo varchar(255),
+autor varchar(255),
+ano_publicacao int,
+disponibilidade tinyint(1)
+);
+
+create table if not exists emprestimos(
+emprestimo_id int primary key auto_increment,
+data_emprestimo date,
+data_devolucao_prevista date,
+devolucao tinyint(1),
+livro_id int,
+usuario_id int,
+foreign key (livro_id) references livro(livro_id),
+foreign key (usuario_id) references usuarios(usuario_id)
+)
