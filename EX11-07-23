@@ -1,28 +1,37 @@
-create schema biblioteca;
+create schema Biblioteca;
 use biblioteca;
 
-create table if not exists usuarios(
-usuario_id int primary key auto_increment,
-nome varchar(255),
-email varchar(255),
-telefone varchar(15)
-);
-
 create table if not exists livro(
-livro_id int primary key auto_increment,
+livroID int primary key unique auto_increment,
 titulo varchar(255),
 autor varchar(255),
-ano_publicacao int,
+anoPublicacao year,
 disponibilidade tinyint(1)
 );
-
-create table if not exists emprestimos(
-emprestimo_id int primary key auto_increment,
-data_emprestimo date,
-data_devolucao_prevista date,
+create table if not exists usuario(
+usuarioID int primary key unique auto_increment,
+nome varchar(255),
+email varchar(255),
+numero varchar(255)
+);
+create table if not exists emprestimo(
+emprestimoID int primary key unique,
+dataEmprestimo date,
+dataDevolucao date,
 devolucao tinyint(1),
-livro_id int,
-usuario_id int,
-foreign key (livro_id) references livro(livro_id),
-foreign key (usuario_id) references usuarios(usuario_id)
-)
+livroID int,
+usuarioID int,
+
+foreign key (livroID) references livro(livroID),
+foreign key (usuarioID) references usuario(usuarioID)
+);
+
+insert into livro(titulo, autor, anoPublicacao, disponibilidade) values ("Dom Quixote", "Miguel de Cervantes", 1605, 1);
+
+insert into usuario(nome, email, numero) values
+("Gustavo Fring", "gus@gmail.com", "27995035524"),
+("Walter White", "heisenberg@gmail.com", "27995025523"),
+("Jesse Pinkman", "jesse@gmail.com", "27995015522");
+
+select titulo, autor from livro;
+select nome, email from usuario;
