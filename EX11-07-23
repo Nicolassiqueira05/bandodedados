@@ -1,11 +1,13 @@
 create schema Biblioteca;
 use biblioteca;
 
+/*1. Criação de tabelas*/
+
 create table if not exists livro(
 livroID int primary key unique auto_increment,
 titulo varchar(255),
 autor varchar(255),
-anoPublicacao year,
+anoPublicacao int,
 disponibilidade tinyint(1)
 );
 create table if not exists usuario(
@@ -15,7 +17,7 @@ email varchar(255),
 numero varchar(255)
 );
 create table if not exists emprestimo(
-emprestimoID int primary key unique,
+emprestimoID int primary key unique auto_increment,
 dataEmprestimo date,
 dataDevolucao date,
 devolucao tinyint(1),
@@ -26,12 +28,45 @@ foreign key (livroID) references livro(livroID),
 foreign key (usuarioID) references usuario(usuarioID)
 );
 
-insert into livro(titulo, autor, anoPublicacao, disponibilidade) values ("Dom Quixote", "Miguel de Cervantes", 1605, 1);
+/*2. Inserção de Informação*/
 
+insert into livro(titulo, autor, anoPublicacao, disponibilidade) values 
+("Dom Quixote", "Miguel de Cervantes", 1605, 1),
+("A Revolta de Atlas", "Ayn Rand", 1957, 1),
+("1984", "George Orwell", 1949, 1);
 insert into usuario(nome, email, numero) values
 ("Gustavo Fring", "gus@gmail.com", "27995035524"),
 ("Walter White", "heisenberg@gmail.com", "27995025523"),
 ("Jesse Pinkman", "jesse@gmail.com", "27995015522");
+insert into emprestimo(dataEmprestimo, dataDevolucao, devolucao, livroID, usuarioID) values 
+('2023-08-29', '2023-09-13', 1, 1, 1),
+('2023-09-01', '2023-09-16', 1, 2, 2),
+('2023-09-17', '2023-09-30', 1, 2, 1);
+
+
+
+select * from usuario;
+select * from livro;
+select * from emprestimo;
+
+/*3. Atualização de informação*/
+
+update emprestimo
+set devolucao = 1
+where emprestimoID = 2;
+
+update livro
+set disponibilidade = 1
+where livroID = 2;
+
+update livro
+set disponibilidade = 0
+where livroID = 1;
+
+/*4. Processamento de Consultas*/
 
 select titulo, autor from livro;
 select nome, email from usuario;
+select livroID from livro group by livroID having count(livroID) = 1;
+
+drop schema biblioteca;
